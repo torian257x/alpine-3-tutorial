@@ -30,30 +30,31 @@
           loadTodo: function () {
             console.error("hello");
             this.todo = null;
+            let that = this;
             $.get(
                 'https://jsonplaceholder.typicode.com/todos/1',
                 function (data) {
                   console.error("data", data);
-                  this.todo = data;
+                  that.todo = data;
+                  console.error("this jquery", this);
                 }
-            )
+            );
           },
-          loadTodoAxios: async function () {
+          loadTodoAxios:  async function () {
 
             console.error("hello axios");
             this.todo = null;
 
             let resp = null;
-            try{
-                resp = await axios.get('https://jsonplaceholder.typicode.com/todos');
-            }catch (e){
-              console.error("this is ussss", e);
-            }
+            // try{
+            resp = await axios.get('https://jsonplaceholder.typicode.com/todos');
+            // }catch (e){
+            //   console.error("this is ussss", e);
+            // }
 
             console.error("resp", resp);
 
             this.todo = resp.data;
-
 
 
           }
