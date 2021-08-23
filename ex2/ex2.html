@@ -14,7 +14,8 @@
         <div  x-text="item"></div>
     </template>
 
-    <button x-on:click="donkey()">Gordon Ramsey</button>
+    <button x-on:click="donkey()">Gordon Ramsey</button> <br>
+    <button x-on:click="myOuterDonkey()">Not a donkey!</button>
 
     <script type="text/javascript">
         function loadMyData(){
@@ -22,9 +23,13 @@
              mymsg: 'messagggeeee',
             myitems: ['a', 'b', 'c'],
              donkey: function(){
-               alert('you are a donkey!!!')
+               alert('you are a donkey!!! ' + this.mymsg);
             }
           }
+        }
+
+        function myOuterDonkey(){
+          alert("not a donkey!!! " + this.mymsg);
         }
     </script>
 </div>
