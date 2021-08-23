@@ -1,0 +1,67 @@
+<html>
+<head>
+    <script defer src="../plugins/alpine3.2.4.js"></script>
+    <script defer
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+
+<div x-data="loadMyData()">
+
+    <h1 x-text="mymsg"></h1>
+    
+
+    <pre>
+        <div x-text="JSON.stringify(todo, null, 2)"></div>
+    </pre>
+
+    <button x-on:click="loadTodo()">Load Todo</button>
+    <button x-on:click="loadTodoAxios()">Load Todo AXIOS</button>
+
+    <script type="text/javascript">
+      function loadMyData() {
+        return {
+          mymsg: 'messagggeeee',
+          todo: null,
+          loadTodo: function () {
+            console.error("hello");
+            this.todo = null;
+            $.get(
+                'https://jsonplaceholder.typicode.com/todos/1',
+                function (data) {
+                  console.error("data", data);
+                  this.todo = data;
+                }
+            )
+          },
+          loadTodoAxios: async function () {
+
+            console.error("hello axios");
+            this.todo = null;
+
+            let resp = null;
+            try{
+                resp = await axios.get('https://jsonplaceholder.typicode.com/todos');
+            }catch (e){
+              console.error("this is ussss", e);
+            }
+
+            console.error("resp", resp);
+
+            this.todo = resp.data;
+
+
+
+          }
+        }
+      }
+
+    </script>
+</div>
+
+</body>
+</html>
