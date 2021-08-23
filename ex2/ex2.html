@@ -14,7 +14,7 @@
         <div  x-text="item"></div>
     </template>
 
-    <button x-on:click="alert('you are a donkey!!!')">Gordon Ramsey</button>
+    <button x-on:click="donkey()">Gordon Ramsey</button>
 
     <script type="text/javascript">
         function loadMyData(){
@@ -22,7 +22,7 @@
              mymsg: 'messagggeeee',
             myitems: ['a', 'b', 'c'],
              donkey: function(){
-
+               alert('you are a donkey!!!')
             }
           }
         }
