@@ -1,0 +1,34 @@
+<html>
+<head>
+    <script defer src="../plugins/alpine3.2.4.js"></script>
+</head>
+<body>
+
+<div x-data="{mymsg: 'helllowwww'}">
+    <button x-on:click="$store.myglobaldata.mygmsg = 'STOP DOODLING ONEa'">stopit</button>
+    <div x-text="mymsg"></div>
+</div>
+
+<div x-data="{mymsg222: 'helllowwww2222'}">
+    <button x-on:click="$store.myglobaldata.mygmsg = 'STOP DOODLING ONE'">stopit</button>
+    <div x-text="mymsg222"></div>
+</div>
+
+
+<div x-data="{}">
+    <h1 x-text="$store.myglobaldata.mygmsg"></h1>
+    <button x-on:click="$store.myglobaldata.mygmsg = 'STOP DOODLING'">stopit</button>
+</div>
+
+<button onclick="Alpine.store('myglobaldata').mygmsg = 'Awww come on yes, you can doodelidoo'">You can</button>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('myglobaldata', {
+       mygmsg: 'doodelidoo'
+    });
+  })
+</script>
+
+</body>
+</html>
