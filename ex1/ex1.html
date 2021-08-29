@@ -1,14 +1,16 @@
 <html>
 <head>
-    <script defer src="../plugins/alpine3.2.4.js"></script>
+    <script src="../plugins/alpine3.2.4.js" defer></script>
 </head>
 <body>
 
 
-<div x-data="{mymsg: 'messagggeeee'}">
+ <div x-data="{msg: 'hollidolli'}">
+     
+     <h1 x-html="'<br/>' + msg + '<br/> buoouua'"></h1>
+     
+ </div>
 
-    <h1 x-text="mymsg"></h1>
-</div>
 
 </body>
 </html>

@@ -1,31 +1,38 @@
+
+
 <html>
 <head>
     <script defer src="../plugins/alpine3.2.4.js"></script>
 </head>
 <body>
 
-    <form x-data="myStuff()" x-on:submit.prevent="myValidate($event)">
-        <input type="text" name="first_name" x-model="myFirstName"/>
-        <div style="background-color: salmon" x-text="errorMsg"></div>
-        <button type="submit">Submit</button>
-        <script type="text/javascript">
-            function myStuff(){
-              return {
-                myFirstName: '',
-                errorMsg: '',
-                myValidate(ev){
-                  if(!this.myFirstName){
-                      ev.preventDefault();
-                    this.errorMsg = 'Hey!!! ENTER A NAME DONKEY!!';
-                  }
+<form x-data="myStuff()" x-on:submit="myValidate($event)">
 
+    <h1>submit first name</h1>
 
-                }
-              }
+    <input type="text" name="first_name" x-model="myFirstName"/>
+    <div x-text="errorMsg" style="background-color: salmon"></div>
+    <button type="submit">Submit</button>
+
+    <script type="text/javascript">
+      function myStuff(){
+        return {
+          myFirstName: '',
+          errorMsg: '',
+          myValidate(event){
+            console.error("event", event);
+            if(!this.myFirstName){
+              this.errorMsg = 'Please enter first name';
+              event.preventDefault();
             }
-        </script>
+          },
+        }
+      }
+    </script>
 
-    </form>
+</form>
 
 </body>
 </html>
+
+

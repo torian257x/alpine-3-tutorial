@@ -1,6 +1,6 @@
 <html>
 <head>
-    <script defer src="../plugins/alpine3.2.4.js"></script>
+    <script src="../plugins/alpine3.2.4.js" defer></script>
     <script defer
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -12,55 +12,39 @@
 
 <div x-data="loadMyData()">
 
-    <h1 x-text="mymsg"></h1>
-    
+    <pre x-text="JSON.stringify(myTodos, null, 2)">
 
-    <pre>
-        <div x-text="JSON.stringify(todo, null, 2)"></div>
     </pre>
 
-    <button x-on:click="loadTodo()">Load Todo</button>
-    <button x-on:click="loadTodoAxios()">Load Todo AXIOS</button>
+    <button x-on:click="loadJqueryData()">Load jQuery</button>
+    <button x-on:click="loadAxiosData()">Load Axios</button>
 
     <script type="text/javascript">
       function loadMyData() {
+        console.error("this OUTER", this);
         return {
-          mymsg: 'messagggeeee',
-          todo: null,
-          loadTodo: function () {
-            console.error("hello");
-            this.todo = null;
-            let that = this;
-            $.get(
-                'https://jsonplaceholder.typicode.com/todos/1',
-                function (data) {
-                  console.error("data", data);
-                  that.todo = data;
-                  console.error("this jquery", this);
-                }
-            );
+          myTodos: [],
+          loadJqueryData() {
+            this.myTodos = [];
+            $.get('https://jsonplaceholder.typicode.com/todos', function (data) {
+              console.error("data", data);
+              this.myTodos = data;
+              console.error("this INNER", this);
+            }.bind(this));
           },
-          loadTodoAxios:  async function () {
-
-            console.error("hello axios");
-            this.todo = null;
-
-            let resp = null;
-            // try{
-            resp = await axios.get('https://jsonplaceholder.typicode.com/todos');
-            // }catch (e){
-            //   console.error("this is ussss", e);
-            // }
-
+          async loadAxiosData() {
+            this.myTodos = [];
+            try {
+              let resp = await axios.get('https://jsonplaceholder.typicode.com/todos');
+            } catch (e) {
+              alert(JSON.stringify(e, null, 2));
+            }
             console.error("resp", resp);
+            this.myTodos = resp.data;
+          },
 
-            this.todo = resp.data;
-
-
-          }
-        }
+        };
       }
-
     </script>
 </div>
 

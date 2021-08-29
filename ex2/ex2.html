@@ -1,38 +1,32 @@
 <html>
 <head>
-    <script defer src="../plugins/alpine3.2.4.js"></script>
+    <script src="../plugins/alpine3.2.4.js" defer></script>
 </head>
 <body>
 
 
-<div x-data="loadMyData()">
+ <div x-data="loadMyData()">
+     
+     <h1 x-html="msg"></h1>
+     <button x-on:click="test()">test in console</button>
 
-    <h1 x-text="mymsg"></h1>
+     <template x-for="item in myItems">
+         <div x-text="item"></div>
+     </template>
 
-    <template x-for="item in myitems">
-        <div  x-text="item"></div>
-        <div  x-text="item"></div>
-    </template>
 
-    <button x-on:click="donkey()">Gordon Ramsey</button> <br>
-    <button x-on:click="myOuterDonkey()">Not a donkey!</button>
-
-    <script type="text/javascript">
-        function loadMyData(){
-          return {
-             mymsg: 'messagggeeee',
-            myitems: ['a', 'b', 'c'],
-             donkey: function(){
-               alert('you are a donkey!!! ' + this.mymsg);
-            }
-          }
-        }
-
-        function myOuterDonkey(){
-          alert("not a donkey!!! " + this.mymsg);
-        }
-    </script>
-</div>
+     <script type="text/javascript">
+         function loadMyData(){
+               return {
+                 myItems: ['donkey', 'monkey', 'elephant'],
+                 msg: 'hollidolli',
+                 test(){
+                 console.error('aaaa');
+               }
+           };
+         }
+     </script>
+ </div>
 
 </body>
 </html>
